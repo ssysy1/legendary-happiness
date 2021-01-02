@@ -1,0 +1,50 @@
+function setup() {
+  
+  createCanvas(400, 400);
+  
+  noStroke();
+  
+}
+
+function draw() {
+  
+  background(0);
+
+  fill(220, 66, 52);
+  arc(200, 200, 400, 400, PI+PI/6, -PI/6, CHORD);
+  triangle(200, 400, 26.8, 100, 200 + Math.sqrt(3)*100, 100);
+  
+  fill(186, 50, 35);
+  triangle(26.8, 100, 200, 270, 200, 400);
+
+  //red
+  
+
+  fill(255, 206, 62);
+  arc(200, 200, 400,400, -PI/6, HALF_PI, CHORD);
+  triangle(200, 400, 200, 100, 200 + Math.sqrt(3)*100, 100);
+  
+  fill(228, 165, 44);
+  triangle(200 + Math.sqrt(3)*100, 100, 200, 100, 200, 150);
+  
+  //yellow
+  
+  fill(6, 158, 87);
+  arc(200, 200, 400,400, HALF_PI, PI+PI/6, CHORD);
+  triangle(200, 400, 200-Math.sqrt(3)*100, 270, 295, 230);
+  
+  fill(7, 136, 75);
+  triangle(200, 400, 250, 200, 295, 230);
+  
+  //green
+  
+  fill(255);
+  ellipse(200, 200, 200);
+  
+  //white
+
+  fill(64, 134, 244);
+  ellipse(200, 200, 160);
+  
+  //blue
+}
