@@ -1,0 +1,71 @@
+let angle = 0
+var w = window.innerWidth,
+    h = window.innerHeight,
+    radius = w / 10;
+
+var dr = 30,
+    rn = .5,
+    t = 0;
+//var cvs, ctx, gradientStroke, pg;
+
+function setup() {
+  createCanvas(400,600);
+}
+
+function draw() {
+  background(236,233,223);
+  noStroke();
+  
+ 
+  fill(240,164,169);
+  rotate(-PI/6/15.0)
+  rectMode(CENTER);
+  rect(200,450,320,220,70,50,70,70);
+  
+  //white
+  fill(247,246,249,191)
+  //fill(random(255),0,random(255));
+  quad(100,100,220,200,250,390,30,300);
+  
+  beginShape();
+  vertex(18,300)
+  bezierVertex(130,400,520,520,160.8,80);
+  bezierVertex(22,180,80,60,18,300);
+  endShape();
+  
+  //red
+  fill(230,171,13,191)
+  quad(90,70,280,450,325,440,330,50);
+  beginShape();
+  vertex(90,70)
+  bezierVertex(140,50,200,45,330,50);
+  endShape();
+  arc(300,430,52,55,0,5*PI/6);
+  
+    beginShape();
+
+    translate(w / 7, h / 5);
+    for (var i = 0; i < TWO_PI; i += radians(1)) {
+
+        var r = radius + map(noise(rn + rn * cos(i), rn + rn * sin(i), t), 0, 1, -dr, dr);
+        var x = r * cos(i);
+        var y = r * sin(i);
+        vertex(x, y); 
+        fill(188,30,28,210);
+    }
+    endShape();
+
+    t += 0.01;
+
+  //brown
+  angle=angle+0.01;
+  let c=angle+HALF_PI;
+  
+  translate(50,50);
+  rotate(c);
+  
+  fill(39,37,36,210)
+  rect(250,50,50,150,10,30,10,20); 
+  
+ 
+}
