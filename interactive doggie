@@ -1,0 +1,99 @@
+let waves = []
+let r, g, b;
+let noiseScale=0.02;
+
+var img;
+var inc = 0.01;
+var start = 0;
+var x = 200;
+var y = 200;
+var R = 50;
+
+function preload(){
+  img=loadImage("doggie.JPG"); 
+}
+
+class Wave{
+  constructor(color, h){
+    this.waveColor = color
+    this.waveHeight = h
+    this.offset = random(100,200)
+    this.t = 0
+  }
+  display(){
+    let xoff = 0
+    fill(this. waveColor)
+    
+    beginShape()
+    for(let x = 0; x<=width +15; x+=15){
+      let yoff = map(noise(xoff + this.offset, this.t + this.offset),0, 1, 200, 400)
+      let y = this.waveHeight = yoff
+      vertex(x,y)
+      xoff += 0.08
+  }
+    vertex(width +100, height)
+    vertex(0, height)
+    endShape(CLOSE)
+  }
+  update(){
+  
+  this.t += 0.005
+    
+  } 
+  }
+
+  
+function setup() {
+  createCanvas(400, 400); 
+  
+  noiseDetail(1.2,1.2)  
+  new Array(5).fill(1).map((_,i)=>{
+    
+    let a = 255-50 *i
+    let c = color(235,141,10)
+    c.setAlpha(a)
+    let h = height - 40
+    let w = new Wave(c,h)
+    waves.push(w)
+    
+  })
+  r = random(255);
+  g = random(255);
+  b = random(255);
+  
+}
+  function draw() { 
+  
+  imageMode(CENTER);
+  tint(255,235,211);
+  image(img,200,200,400,400);
+    
+    
+     if(mouseIsPressed&&dist(mouseX,mouseY,x,y)<R){
+  	x=mouseX;
+    y=mouseY;
+  }
+  
+    strokeWeight(2)
+    stroke(r,g,b)
+    fill(r,g,b,200)  
+    ellipse(x,y,R,R);
+    ellipse(x+50,y+50,10)
+    
+    waves.forEach(w => {
+      w.display()
+      w.update()
+    })
+  
+}
+
+function mousePressed() {
+  
+  let d = dist(mouseX, mouseY, mouseX+50, mouseY+50);
+  if (d < 100) {
+    r = random(255);
+    g = random(255);
+    b = random(255);
+  }
+ 
+}
