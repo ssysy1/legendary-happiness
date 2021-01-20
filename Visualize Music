@@ -1,0 +1,78 @@
+var song;
+var amp;
+var A
+var button;
+var fft;
+var w;
+
+var volhistory = [];
+
+function toggleSong(){
+  if(song.isPlaying()){
+    song.pause();
+  }
+  else{
+    song.play();
+  }
+}
+
+function preload(){
+  song = loadSound('Sunburst.mp3');
+  
+}
+function setup() {
+  createCanvas(400, 400);
+  angleMode(DEGREES);
+  colorMode(HSB);
+ 
+  button = createButton('toggle');
+  button.mousePressed(toggleSong);
+  song.play();
+  fft = new p5.FFT(0, 256);
+  w = width / 64;
+  A = new p5.Amplitude();
+}
+
+
+function draw() {
+  background(0);
+  var vol = A.getLevel();
+  var diam = map(vol, 0, 0.5, 30, 150);
+  if (song.isPlaying()) {
+  fill('#4cb49c');
+  strokeWeight(2)
+ stroke('#2f4013');
+  ellipse(300, 80,diam, diam);
+  fill('#9bcb64');
+   strokeWeight(3)
+  stroke('#2f4013');
+  ellipse(300, 80, diam/2, diam/2);
+    noStroke();
+    fill('#abdbe3');
+  ellipse(200, 50, diam/4, diam/4);
+    fill('#76b5c5');
+  ellipse(360,120, diam/6, diam/6);
+    fill('#6ca2d8');
+  rect(360, 20, diam/6, diam/6); 
+    fill('#15369d');
+  ellipse(280, 15, diam/7, diam/7);
+    fill('#576ec6');
+   rect(110, 20, diam/5, diam/5);
+    
+  } else {
+    background(0);
+  
+  }
+  var spectrum = fft.analyze();
+  //console.log(spectrum.length);
+  noStroke();
+  for(var i = 0; i < spectrum.length; i++){
+    var amp = spectrum[i];
+    var y = map(amp, 0, 256, height, 0);
+    fill(i,255,255);
+    rect(i * w, y, w-2, height-y);
+  }
+  stroke(255);
+  noFill();
+ 
+}
